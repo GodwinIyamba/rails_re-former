@@ -43,8 +43,20 @@
 <%
 =end%>
 
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+    <ul>
+      <% @user.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_with model: @user do |form| %>
-    <div>
+     <div>
         <%= form.label :username, "Username" %>
         <%= form.text_field :username, placeholder: "johndoe" %>
     </div>
@@ -57,5 +69,4 @@
         <%= form.password_field :password, placeholder: "password" %>
     </div>
     <%= form.submit %>
-
 <% end %>
